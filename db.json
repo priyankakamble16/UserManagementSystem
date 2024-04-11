@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "firstName": "Neha",
+      "lastName": "Sharma",
+      "email": "neha@gmail.com",
+      "phone": "9123764980",
+      "address": "Pune"
+    },
+    {
+      "id": "2223",
+      "firstName": "Jiya",
+      "lastName": "Shankar",
+      "email": "jiya@gmail.com",
+      "address": "Delhi",
+      "phone": "9812345678"
+    },
+    {
+      "id": "0baf",
+      "firstName": "Maya",
+      "lastName": "Shah",
+      "email": "maya@gmail.com",
+      "address": "Solapur",
+      "phone": "9812345678"
+    }
+  ]
+}

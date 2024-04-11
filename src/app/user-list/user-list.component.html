@@ -1,0 +1,102 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h1 style="color: rgb(253,249,15);">User List</h1>
+        <div>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="clickAddUser()">Add User</button>
+        </div>
+
+         
+    </div>
+</nav>
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">User Id</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Action</th>
+        </tr>
+ 
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of usersall">
+            <td>{{user.id}}</td> 
+           <td>{{user.firstName}}</td> 
+           <td>{{user.lastName}}</td>
+           <td>{{user.email}}</td>
+           <td>{{user.address}}</td>
+           <td>{{user.phone}}</td>
+           <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onEdit(user)">Edit</button>&nbsp;
+            <button class="btn btn-success" (click)="deleteUser(user)">Delete</button>
+            
+           </td>
+        </tr>
+    </tbody>
+</table>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formValue" >
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">FirstName</label>
+                  <input type="text"  formControlName="firstName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
+                  <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                    <div *ngIf="f['firstName'].errors['required']">FirstName is required</div>
+                </div>
+                 
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Lastname</label>
+                  <input type="text" formControlName="lastName" class="form-control" id="exampleInputPassword1"  [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
+                  <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                    <div *ngIf="f['lastName'].errors['required']">LastName is required</div>
+                </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">email</label>
+                    <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors['required']">Email is required</div>
+                        <div *ngIf="f['email'].errors?.['email']">Email must be a valid email address</div>
+                    </div>
+                   
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Phone</label>
+                    <input type="text" formControlName="phone" class="form-control" id="exampleInputPassword1" [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }">
+                    <div *ngIf="f['phone'].touched && f['phone'].invalid" class="alert alert-danger">  
+                        <div *ngIf="f['phone'].errors['required']">Mobile Number is required.</div>  
+                        <div *ngIf="f['phone'].errors['pattern']">Please, Enter 10 digit Mobile Number.</div>  
+                    </div> 
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Address</label>
+                    <input type="text" class="form-control" formControlName="address" id="exampleInputPassword1" [ngClass]="{ 'is-invalid': submitted && f['address'].errors }">
+                    <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                        <div *ngIf="f['address'].errors['required']">Address is required</div>
+                    </div>
+                  </div>
+              
+                
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button *ngIf="showAdd" type="button" class="btn btn-primary" (click)="postUserDetails()">Save</button>
+          <button class="btn btn-success" *ngIf="showupdate" (click)="updateUser()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
